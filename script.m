@@ -7,7 +7,7 @@ datapoints = 4 * height(data);
 [C, S, R, L] = deal(zeros(datapoints,1)); % Curve, Sign, Radius, Length
 
 dic1 = ["Αριστερή", "Αριστερη", "αριστερή", "αριστερη"];	% LEFT
-dic2 = ["Δεξιά", "Δεξια", "δεξιά", "δεξια"];			% RIGHT
+dic2 = ["Δεξιά", "Δεξια", "δεξιά", "δεξια"];				% RIGHT
 
 i=1;
 while i <= height(data)
@@ -65,11 +65,11 @@ for j = 1:datapoints
             DT = fzero(G,[0,L(j)]);
             DN = 1/a * DT^3;
             DE = rad2deg(3/a * DT^2);
-            dt = linspace(0,DT,res);
-            if mod(j,4) == 2 		% ENTRY
-		dn = 1/a * dt.^3;
-            else			% EXIT
-                dt = flip(dt);
+            if mod(j,4) == 2			% ENTRY
+            	dt = linspace(0,DT,res);
+				dn = 1/a * dt.^3;
+            else						% EXIT
+                dt = linspace(DT,0,res);
                 dn = 1/a * dt.^3;
             end
             style = 'c-.';
@@ -91,4 +91,4 @@ for j = 1:datapoints
     E(j+1) = E(j) + S(j)*DE;
 end
 
-plot(X, Y, 'ys', 'MarkerSize', 5, 'LineWidth', 1); disp([X,Y,E]);
+plot(X, Y, 'ys', 'MarkerSize', 5, 'LineWidth', 1); % disp([X,Y,E]);
